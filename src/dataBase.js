@@ -18,6 +18,12 @@ const dataBase = {
       { id: 11, menuName: '샴페인', menuAmount: 25000, category: 'beverage' },
     ];
   },
+
+  getDiscountPrice() {
+    return {
+      minimumPrice: 10000,
+    };
+  },
 };
 
 export default dataBase;

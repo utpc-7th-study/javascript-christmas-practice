@@ -13,6 +13,8 @@ class App {
     OutputView.printStartMessage();
     await this.#registerVisitDateProcess();
     await this.#registerOrderMenuProcess();
+
+    this.#recommendMenuProcess();
   }
 
   async #registerVisitDateProcess() {
@@ -37,6 +39,10 @@ class App {
         OutputView.print(message);
       }
     }
+  }
+
+  #recommendMenuProcess() {
+    this.#eventPlanner.recommend();
   }
 }
 

@@ -10,6 +10,16 @@ class OrderMenu {
     this.#orderMenus = this.#splitOrderMenu(orderMenu);
   }
 
+  getTotalPrice() {
+    const menuNames = this.#orderMenus.map(({ menuName }) => menuName);
+
+    const menuPriceList = Object.values(dataBase.getMenus())
+      .filter(({ menuName }) => menuNames.includes(menuName))
+      .map(({ menuAmount }) => menuAmount);
+
+    return menuPriceList.reduce((a, c) => a + c, 0);
+  }
+
   #splitOrderMenu(orderMenu) {
     const splitOrderMenuWithComma = orderMenu.split(',');
 
