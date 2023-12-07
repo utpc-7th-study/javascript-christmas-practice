@@ -13,6 +13,10 @@ class DateManager {
     if (!/^[0-9]+$/.test(visitDate)) {
       throw new Error(ERROR_MESSAGE);
     }
+
+    if (Number(visitDate) < 1 || Number(visitDate) > 31) {
+      throw new Error(ERROR_MESSAGE);
+    }
   }
 }
 
