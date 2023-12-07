@@ -1,6 +1,29 @@
 import Order from '../../src/domains/Order';
 import { OrderMenuInputError } from '../../src/errors/UserInputErros';
 
+describe('createOrderDeatail', () => {
+  test('주문한 메뉴의 상세정보를 반환한다.', () => {
+    // given
+    const order = '티본스테이크-1,해산물파스타-3,레드와인-3';
+    const orderInstance = new Order(order);
+
+    // when
+    const result = orderInstance.createOrderDetail();
+
+    // then
+    expect(result).toStrictEqual({
+      main: {
+        count: 4,
+        menu: ['티본스테이크', '해산물파스타'],
+      },
+      drink: {
+        count: 3,
+        menu: ['레드와인'],
+      },
+    });
+  });
+});
+
 describe('Order test', () => {
   const INVALID_CHAR = ',';
   test('올바르지 않은 메뉴형식을 입력했을때 예외가 발생해야 한다.', () => {

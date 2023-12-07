@@ -6,15 +6,44 @@ const MENU_NAME = 0;
 const MENU_COUNT = 1;
 
 export default class Order {
-  #customerInputMenus;
+  #customerOrder;
   #menuPan = new MenuPan();
 
   constructor(customerInputMenus, _ = paramType(customerInputMenus, 'string')) {
     this.#validate(customerInputMenus);
-    this.#customerInputMenus = customerInputMenus;
+    this.#customerOrder = this.#formattingOrder(customerInputMenus);
   }
 
-  createOrderDetail() {}
+  // eslint-disable-next-line max-lines-per-function
+  createOrderDetail() {
+    // eslint-disable-next-line max-lines-per-function
+    return this.#customerOrder.reduce((orderDetails, [menuName, count]) => {
+      const category = this.#menuPan.findCategory(menuName);
+      if (orderDetails[category]) {
+        orderDetails[category].count += count;
+        orderDetails[category].menu = [
+          ...orderDetails[category].menu,
+          menuName,
+        ];
+      } else {
+        orderDetails[category] = {
+          count,
+          menu: [menuName],
+        };
+      }
+      return orderDetails;
+    }, {});
+  }
+
+  #formattingOrder(
+    customerInputMenus,
+    _ = paramType(customerInputMenus, 'string'),
+  ) {
+    return customerInputMenus
+      .split(',')
+      .map((menuAndCount) => menuAndCount.split('-'))
+      .map(([menuName, count]) => [menuName, Number(count)]);
+  }
 
   #validate(customerInputMenus, _ = paramType(customerInputMenus, 'string')) {
     this.#checkInputFormat(customerInputMenus);
