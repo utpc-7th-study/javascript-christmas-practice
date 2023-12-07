@@ -12,7 +12,15 @@ export default class DiscountCondition {
     return this._isPossible(visitDate);
   }
 
+  getDiscountPolicy() {
+    return this._getDiscountPolicy();
+  }
+
   _isPossible(visitDate) {
     throw new Error('_isSatisfied 메소드는 override 되어야 합니다.');
+  }
+
+  _getDiscountPolicy() {
+    throw new Error('_getDiscountPolicy 메소드는 override 되어야 합니다.');
   }
 }
