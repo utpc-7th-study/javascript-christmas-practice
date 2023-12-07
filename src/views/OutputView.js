@@ -49,6 +49,11 @@ const OutputView = {
     if (freebie !== '없음') Console.print('증정 이벤트: -25,000원');
   },
 
+  printTotalBenefit(benefit) {
+    Console.print('\n<총혜택 금액>');
+    Console.print(`-${addComma(benefit)}원`);
+  },
+
   printBadge(badge) {
     Console.print('\n<12월 이벤트 배지>');
     Console.print(badge);

@@ -29,6 +29,7 @@ class Controller {
     OutputView.printOriginalPayment(this.#user.calculateOriginalPayment());
     OutputView.printFreebie(this.#user.getFreebie());
     OutputView.printBenefitList(this.#user.getBenefitList());
+    OutputView.printTotalBenefit(this.#user.calculateTotalBenefit());
     OutputView.printBadge(this.#user.getBadge());
   }
 }
