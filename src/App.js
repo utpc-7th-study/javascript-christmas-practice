@@ -7,6 +7,8 @@ class App {
 
     const dateMenu = await InputView.readDate();
     const menuList = await InputView.readMenus();
+
+    controller.order(menuList);
   }
 }
 
