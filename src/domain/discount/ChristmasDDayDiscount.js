@@ -8,7 +8,14 @@ class ChristmasDDayDiscount extends Discount {
     this.#dateManager = dateManager;
   }
 
-  abstractCalculateDiscount() {}
+  abstractCalculateDiscount() {
+    const defaultPrice = 1000;
+    const pastDate = this.#dateManager.getVisitDate() - 1;
+
+    if (pastDate >= 25) return 0;
+
+    return pastDate * 100 + defaultPrice;
+  }
 }
 
 export default ChristmasDDayDiscount;

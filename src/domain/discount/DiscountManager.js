@@ -10,10 +10,9 @@ class DiscountManager {
   }
 
   recommendDiscount() {
-    this.#calculateChristmasDDayDiscount();
-    {
-      christmasDDayDiscount: this.#calculateChristmasDDayDiscount();
-    }
+    return {
+      christmasDDayDiscount: this.#calculateChristmasDDayDiscount(),
+    };
   }
 
   #calculateChristmasDDayDiscount() {

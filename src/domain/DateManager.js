@@ -4,11 +4,11 @@ class DateManager {
   constructor(visitDate) {
     this.#validate(visitDate);
 
-    this.#visitDate = Number(visitDate);
+    this.#visitDate = visitDate;
   }
 
-  getPastDate() {
-    return this.#visitDate - 1;
+  getVisitDate() {
+    return Number(this.#visitDate);
   }
 
   #validate(visitDate) {
