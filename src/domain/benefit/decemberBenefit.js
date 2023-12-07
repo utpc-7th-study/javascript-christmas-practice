@@ -1,7 +1,11 @@
-import Benefit from './benefit';
+import Benefit from './benefit.js';
 
 class DecemberBenefit extends Benefit {
-  getGift() {
+  discountDetail() {
+    return this.discount.get();
+  }
+
+  giftDetail() {
     return this.gift.get();
   }
 
