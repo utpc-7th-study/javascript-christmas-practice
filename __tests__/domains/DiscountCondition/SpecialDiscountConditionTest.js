@@ -1,5 +1,5 @@
-import DiscountCondition from '../../../src/domains/DiscountCondition.js/DiscountCondition';
-import SpecialDiscountCondition from '../../../src/domains/DiscountCondition.js/SpecialDiscountCondition';
+import DiscountCondition from '../../../src/domains/DiscountCondition/DiscountCondition';
+import SpecialDiscountCondition from '../../../src/domains/DiscountCondition/SpecialDiscountCondition';
 
 describe('상속 테스트', () => {
   test('추상 클래스로부터 상속받지 않으면 에러를 던진다.', () => {

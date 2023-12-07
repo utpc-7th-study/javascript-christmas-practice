@@ -1,4 +1,4 @@
-import DiscountCondition from '../../../src/domains/DiscountCondition.js/DiscountCondition';
+import DiscountCondition from '../../../src/domains/DiscountCondition/DiscountCondition';
 
 jest.mock('../../../src/lib/src/paramType.js', () => {
   return jest.fn(() => true);

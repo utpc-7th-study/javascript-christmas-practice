@@ -1,5 +1,5 @@
-import ChristmasDiscountCondition from '../../../src/domains/DiscountCondition.js/ChristmasDiscountCondition';
-import DiscountCondition from '../../../src/domains/DiscountCondition.js/DiscountCondition';
+import ChristmasDiscountCondition from '../../../src/domains/DiscountCondition/ChristmasDiscountCondition';
+import DiscountCondition from '../../../src/domains/DiscountCondition/DiscountCondition';
 
 describe('상속 테스트', () => {
   const possibleDiscountDates = Array.from({ length: 25 }, (_, i) => i + 1);
