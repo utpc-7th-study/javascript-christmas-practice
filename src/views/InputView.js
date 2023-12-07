@@ -15,8 +15,8 @@ const InputView = {
     );
 
     return inputs.split(',').map((input) => {
-      const [menuName, count] = input.split('-');
-      return [menuName, Number(count)];
+      const [menuName, quantity] = input.split('-');
+      return [menuName, Number(quantity)];
     });
   },
 };
