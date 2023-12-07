@@ -46,16 +46,16 @@ const OutputView = {
 
   printBenefits(discountDetail, giftDetail) {
     const discountDetails = Object.entries(discountDetail);
-
     const message = [
       `${LINE_SEPARATOR}${this.titleTemplate('혜택 내역')}`,
       discountDetails.length
-        ? discountDetails.map(
-            ([benefit, discountAmount]) =>
-              `${KR_BENEFIT_DATA[benefit]}: -${discountAmount}${LINE_SEPARATOR}`,
-          )
+        ? discountDetails
+            .map(([benefit, discountAmount]) => `${KR_BENEFIT_DATA[benefit]}: -${discountAmount}원`)
+            .join(LINE_SEPARATOR)
         : '없음',
     ];
+
+    if (giftDetail) message.push(`증정 이벤트: -${giftDetail.price}원`);
 
     this.print(message.join(LINE_SEPARATOR));
   },

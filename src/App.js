@@ -1,5 +1,8 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
+import DecemberBenefit from './domain/benefit/decemberBenefit.js';
+import DecemberDiscount from './domain/benefit/discount/decemberDiscount.js';
+import DecemberGift from './domain/benefit/gift/decemberGift.js';
 import OrderList from './domain/orderList.js';
 import VisitDate from './domain/visitDate.js';
 
@@ -12,7 +15,7 @@ class App {
     OutputView.printGreeting();
     await this.#readVisitDate();
     await this.#readOrder();
-    this.printRecipt();
+    this.#printRecipt();
   }
 
   async #readVisitDate() {
@@ -37,10 +40,26 @@ class App {
     }
   }
 
-  printRecipt() {
-    const totalCost = this.#orderList.totalCost()
+  #printRecipt() {
+    const totalCost = this.#orderList.totalCost();
+    OutputView.printPreview(this.#visitDate.getDate());
     OutputView.printMenu(this.#orderList.orderDetail());
     OutputView.printTotalCost(totalCost);
+    const { discountDetail, giftDetail } = this.#getBenefitDetail();
+    OutputView.printGift(giftDetail);
+    OutputView.printBenefits(discountDetail, giftDetail);
+  }
+
+  #getBenefitDetail() {
+    const discount = new DecemberDiscount(this.#visitDate);
+    const gift = new DecemberGift(this.#orderList.totalCost());
+    const decemberBenefit = new DecemberBenefit(discount, gift);
+    decemberBenefit.applyBenefit(this.#orderList.dessertCount(), this.#orderList.mainCount());
+
+    return {
+      discountDetail: decemberBenefit.discountDetail(),
+      giftDetail: decemberBenefit.giftDetail(),
+    };
   }
 }
 

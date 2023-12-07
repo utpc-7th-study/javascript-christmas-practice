@@ -7,8 +7,8 @@ class DecemberDiscount extends Discount {
 
   #D_DAY_INCREASE = 100;
 
-  apply() {
-    this.#weekDiscount();
+  apply(dessertCount, mainCount) {
+    this.#weekDiscount(dessertCount, mainCount);
     this.#specialDiscount();
     this.#xMasDdayDiscount();
   }
