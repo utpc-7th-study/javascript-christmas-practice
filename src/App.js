@@ -1,12 +1,12 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import Order from './domain/orderList.js';
+import OrderList from './domain/orderList.js';
 import VisitDate from './domain/visitDate.js';
 
 class App {
   #visitDate;
 
-  #order;
+  #orderList;
 
   async run() {
     OutputView.printGreeting();
@@ -26,10 +26,10 @@ class App {
   }
 
   async #readOrder() {
-    while (!this.#order) {
+    while (!this.#orderList) {
       try {
         const orderInput = await InputView.readOrder();
-        this.#order = new Order(orderInput);
+        this.#orderList = new OrderList(orderInput);
       } catch (error) {
         OutputView.print(error.message);
       }
