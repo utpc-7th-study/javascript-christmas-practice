@@ -25,9 +25,11 @@ class OrderMenu {
   #validate(orderMenu) {
     const splitOrderMenu = this.#splitOrderMenu(orderMenu);
     const menuAmounts = splitOrderMenu.map(({ menuAmount }) => menuAmount);
+    const menuNames = splitOrderMenu.map(({ menuName }) => menuName);
 
     this.#validateNumberType(menuAmounts);
     this.#validateMenuAmountRange(menuAmounts);
+    this.#validateDuplicateMenuNames(menuNames);
   }
 
   #validateNumberType(menuAmounts) {
@@ -47,6 +49,12 @@ class OrderMenu {
     }
 
     if (isNotValid) {
+      throw new Error(ERROR_MESSAGE);
+    }
+  }
+
+  #validateDuplicateMenuNames(menuNames) {
+    if (new Set(menuNames).size !== menuNames.length) {
       throw new Error(ERROR_MESSAGE);
     }
   }
