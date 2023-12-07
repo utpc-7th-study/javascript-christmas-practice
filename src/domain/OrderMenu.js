@@ -27,10 +27,24 @@ class OrderMenu {
     const menuAmounts = splitOrderMenu.map(({ menuAmount }) => menuAmount);
 
     this.#validateNumberType(menuAmounts);
+    this.#validateMenuAmountRange(menuAmounts);
   }
 
   #validateNumberType(menuAmounts) {
     const isNotValid = menuAmounts.some((number) => !/^[0-9]+$/.test(number));
+
+    if (isNotValid) {
+      throw new Error(ERROR_MESSAGE);
+    }
+  }
+
+  #validateMenuAmountRange(menuAmounts) {
+    const totalMenuAmounts = menuAmounts.reduce((a, c) => a + c, 0);
+    const isNotValid = menuAmounts.some((number) => number < 1);
+
+    if (totalMenuAmounts > 20) {
+      throw new Error(ERROR_MESSAGE);
+    }
 
     if (isNotValid) {
       throw new Error(ERROR_MESSAGE);
