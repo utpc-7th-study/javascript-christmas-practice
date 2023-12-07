@@ -1,9 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
+import { EOL as LINE_SEPARATOR } from 'os';
 
 const InputView = {
   async readDate() {
     const input = await this.read(
-      '12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)',
+      `12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)'${LINE_SEPARATOR}`,
     );
 
     return input;
