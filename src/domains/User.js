@@ -4,6 +4,7 @@ import EventList from './EventLIst.js';
 class User {
   #orderList;
   #benefitList;
+  #freebie;
 
   constructor() {
     this.#orderList = [];
@@ -28,7 +29,8 @@ class User {
   createBenefitList(date) {
     const originalPayment = this.calculateOriginalPayment();
     const eventList = new EventList();
-    const eventResult = eventList.getBenefit(date, originalPayment);
+    const [eventResult, freebie] = eventList.getBenefit(date, originalPayment);
+    this.#freebie = freebie;
     this.#findSatisfiedMenus(eventResult);
   }
 
