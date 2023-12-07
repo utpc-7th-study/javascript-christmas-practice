@@ -100,6 +100,23 @@ class User {
   getFreebie() {
     return this.#freebie;
   }
+
+  getBenefitList() {
+    if (this.#benefitList.length === 0) {
+      return ['없음', this.#freebie];
+    }
+
+    const result = this.#benefitList.filter((benefit) => {
+      const [_, amount] = benefit;
+      return amount === 0;
+    });
+
+    if (result.length === this.#benefitList) {
+      return ['없음', this.#freebie];
+    }
+
+    return [this.#benefitList, this.#freebie];
+  }
 }
 
 export default User;

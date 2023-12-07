@@ -34,6 +34,21 @@ const OutputView = {
     Console.print(`${menuName} ${quantity}개`);
   },
 
+  printBenefitList(result) {
+    Console.print('\n<혜택 내역>');
+    const [benefitList, freebie] = result;
+
+    if (benefitList === '없음') return Console.print(benefitList);
+
+    benefitList.forEach((benefit) => {
+      const [name, discount] = benefit;
+      if (discount === 0) return;
+      Console.print(`${name}: -${addComma(discount)}원`);
+    });
+
+    if (freebie !== '없음') Console.print('증정 이벤트: -25,000원');
+  },
+
   printBadge(badge) {
     Console.print('\n<12월 이벤트 배지>');
     Console.print(badge);

@@ -28,6 +28,7 @@ class Controller {
   showBenefitResult() {
     OutputView.printOriginalPayment(this.#user.calculateOriginalPayment());
     OutputView.printFreebie(this.#user.getFreebie());
+    OutputView.printBenefitList(this.#user.getBenefitList());
     OutputView.printBadge(this.#user.getBadge());
   }
 }
