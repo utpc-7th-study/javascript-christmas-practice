@@ -1,3 +1,10 @@
+import { MENUS } from '../constants/menus.js';
+
+const isBeverage = (menu) => {
+  const [name, _] = menu;
+  return name === '제로콜라' || name === '레드와인' || name === '샴페인';
+};
+
 const Validator = {
   numberType(input) {
     if (!Number.isInteger(input)) {
@@ -10,9 +17,19 @@ const Validator = {
       throw new Error('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
     }
   },
+
+  onlyBeverage(menus) {
+    if (menus.every((menu) => isBeverage(menu))) {
+      throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    }
+  },
 };
 
 export const validateDate = (date) => {
   Validator.numberType(date);
   Validator.range(date);
+};
+
+export const validateMenus = (menus) => {
+  Validator.onlyBeverage(menus);
 };
