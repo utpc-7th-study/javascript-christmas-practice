@@ -10,6 +10,10 @@ class OrderMenu {
     this.#orderMenus = this.#splitOrderMenu(orderMenu);
   }
 
+  getMenus() {
+    return this.#orderMenus;
+  }
+
   getTotalPrice() {
     const menuNames = this.#orderMenus.map(({ menuName }) => menuName);
 

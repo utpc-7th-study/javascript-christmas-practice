@@ -11,6 +11,10 @@ class DateManager {
     return Number(this.#visitDate);
   }
 
+  isWeekDay() {
+    return new Date(`2023-12-${this.#visitDate}`).getDay() < 5;
+  }
+
   #validate(visitDate) {
     const ERROR_MESSAGE = '[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.';
 
