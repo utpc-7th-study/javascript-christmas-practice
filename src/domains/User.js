@@ -96,6 +96,10 @@ class User {
   getOrderList() {
     return this.#orderList;
   }
+
+  getFreebie() {
+    return this.#freebie;
+  }
 }
 
 export default User;

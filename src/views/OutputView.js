@@ -25,6 +25,15 @@ const OutputView = {
     Console.print(`${addComma(payment)}원`);
   },
 
+  printFreebie(freebie) {
+    Console.print('\n<증정 메뉴>');
+    if (freebie === '없음') {
+      return Console.print(freebie);
+    }
+    const [menuName, quantity] = freebie;
+    Console.print(`${menuName} ${quantity}개`);
+  },
+
   printBadge(badge) {
     Console.print('\n<12월 이벤트 배지>');
     Console.print(badge);
