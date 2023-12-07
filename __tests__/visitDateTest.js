@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import VisitDate from '../src/domain/visitDate';
 
 describe('방문 일자 테스트', () => {
@@ -14,4 +15,27 @@ describe('방문 일자 테스트', () => {
       expect(() => new VisitDate(visitDate)).not.toThrow('[ERROR]');
     },
   );
+
+  test('방문 날짜에 따른 요일을 계산한다.', () => {
+    // given
+    const date = 8;
+    const expected = '금';
+
+    // mocking
+    const mockYear = jest.spyOn(Date.prototype, 'getFullYear');
+    mockYear.mockImplementation(() => 2023);
+
+    const mockMonth = jest.spyOn(Date.prototype, 'getMonth');
+    mockMonth.mockImplementation(() => 12);
+
+    // when
+    const visitDate = new VisitDate(date);
+    const dayOfWeek = visitDate.getDayOfWeek();
+
+    // then
+    expect(dayOfWeek).toBe(expected);
+
+    mockYear.mockRestore();
+    mockMonth.mockRestore();
+  });
 });

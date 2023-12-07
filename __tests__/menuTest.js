@@ -1,10 +1,11 @@
-import Menu from '../src/domain/menu';
+import Order from "../src/domain/order";
+
 
 describe('메뉴 테스트', () => {
   test.each(['과', '자', '소주', '감자탕', '습하게띠', '설렁탕'])(
     '메뉴판에 없는 음식이 입력되면 예외가 발생한다.',
     (menu) => {
-      expect(() => new Menu(menu, 1)).toThrow('[ERROR]');
+      expect(() => new Order(menu, 1)).toThrow('[ERROR]');
     },
   );
 
@@ -13,6 +14,6 @@ describe('메뉴 테스트', () => {
     const menu = '양송이수프';
 
     // when & then
-    expect(() => new Menu(menu, 1)).not.toThrow();
+    expect(() => new Order(menu, 1)).not.toThrow();
   });
 });
