@@ -11,6 +11,12 @@ const OutputView = {
     return `${menu} ${quantity}개`;
   },
 
+  printPreview(date) {
+    this.print(
+      `${new Date().getMonth() + 1}월 ${date}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n`,
+    );
+  },
+
   printMenu(orderedMenu) {
     const message = [
       `${LINE_SEPARATOR}${this.titleTemplate('주문 메뉴')}`,
