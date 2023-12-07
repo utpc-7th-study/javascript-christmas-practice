@@ -62,10 +62,10 @@ const OutputView = {
     this.print(message.join(LINE_SEPARATOR));
   },
 
-  printTotalDiscount(discountAmount, giftDetail) {
+  printTotalDiscount(discountAmount) {
     const message = [
       `${LINE_SEPARATOR}${this.titleTemplate('총혜택 금액')}`,
-      `-${addComma((discountAmount ?? 0) + (giftDetail.price ?? 0))}원`,
+      `-${addComma(discountAmount)}원`,
     ];
 
     this.print(message.join(LINE_SEPARATOR));
@@ -81,7 +81,7 @@ const OutputView = {
   },
 
   printBadge(badge) {
-    const message = [`${LINE_SEPARATOR}${this.titleTemplate('12월 이벤트 배지')}`, badge];
+    const message = [`${LINE_SEPARATOR}${this.titleTemplate('12월 이벤트 배지')}`, badge ?? '없음'];
 
     this.print(message.join(LINE_SEPARATOR));
   },
