@@ -23,8 +23,8 @@ class OrderList {
 
   totalCost() {
     return this.#orders.reduce((total, currentOrder) => {
-      const { price } = currentOrder.detail();
-      return total + price;
+      const { price, quantity } = currentOrder.detail();
+      return total + price * quantity;
     }, 0);
   }
 
