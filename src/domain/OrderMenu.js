@@ -34,6 +34,7 @@ class OrderMenu {
     this.#validateDuplicateMenuNames(menuNames);
     this.#validateIncludeMenu(menuNames);
     this.#validateOnlyBeverage(menuNames);
+    this.#validateMenuOderFormat(menuNames);
   }
 
   #validateNumberType(menuAmounts) {
@@ -65,7 +66,7 @@ class OrderMenu {
 
   #validateIncludeMenu(menuNames) {
     const menuDataBase = Object.values(dataBase.getMenus()).map(({ menuName }) => menuName);
-    const isValid = menuNames.some((menu) => menuDataBase.includes(menu));
+    const isValid = menuNames.every((menu) => menuDataBase.includes(menu));
 
     if (!isValid) {
       throw new Error(ERROR_MESSAGE);
@@ -80,6 +81,14 @@ class OrderMenu {
     const isOnlyBeverage = menuNames.every((menu) => beverageDataBase.includes(menu));
 
     if (isOnlyBeverage) {
+      throw new Error(ERROR_MESSAGE);
+    }
+  }
+
+  #validateMenuOderFormat(menuNames) {
+    const isValid = menuNames.every((menuName) => menuName.trim('') === menuName);
+
+    if (!isValid) {
       throw new Error(ERROR_MESSAGE);
     }
   }
