@@ -1,7 +1,10 @@
+const ERROR_MESSAGE = '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.';
+
 class OrderMenu {
   #orderMenus;
 
   constructor(orderMenu) {
+    this.#validate(orderMenu);
     this.#orderMenus = this.#splitOrderMenu(orderMenu);
   }
 
@@ -17,6 +20,21 @@ class OrderMenu {
 
       return { menuName, menuAmount: Number(menuAmount) };
     });
+  }
+
+  #validate(orderMenu) {
+    const splitOrderMenu = this.#splitOrderMenu(orderMenu);
+    const menuAmounts = splitOrderMenu.map(({ menuAmount }) => menuAmount);
+
+    this.#validateNumberType(menuAmounts);
+  }
+
+  #validateNumberType(menuAmounts) {
+    const isNotValid = menuAmounts.some((number) => !/^[0-9]+$/.test(number));
+
+    if (isNotValid) {
+      throw new Error(ERROR_MESSAGE);
+    }
   }
 }
 
