@@ -89,5 +89,5 @@ export const validateMenus = (menus) => {
   Validator.invalidQuantity(menus);
   Validator.overMaxQuantity(menus);
   Validator.notExists(menus);
-  Valdiator.duplicated(menus);
+  Validator.duplicated(menus);
 };
