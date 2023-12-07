@@ -12,6 +12,7 @@ class App {
     OutputView.printGreeting();
     await this.#readVisitDate();
     await this.#readOrder();
+    this.printRecipt();
   }
 
   async #readVisitDate() {
@@ -34,6 +35,12 @@ class App {
         OutputView.print(error.message);
       }
     }
+  }
+
+  printRecipt() {
+    const totalCost = this.#orderList.totalCost()
+    OutputView.printMenu(this.#orderList.orderDetail());
+    OutputView.printTotalCost(totalCost);
   }
 }
 

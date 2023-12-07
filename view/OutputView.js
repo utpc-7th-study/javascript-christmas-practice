@@ -11,16 +11,6 @@ const OutputView = {
     return `${menu} ${quantity}개`;
   },
 
-  printRecipt(orderedMenu, totalCost, totalDiscountAmount, gift, benefits, badge) {
-    this.printMenu(orderedMenu);
-    this.printTotalCost(totalCost);
-    this.printGift(gift);
-    this.printTotalDiscount(totalDiscountAmount);
-    this.printBenefits(benefits);
-    this.printFinalCost(totalCost - totalDiscountAmount);
-    this.printBadge(badge);
-  },
-
   printMenu(orderedMenu) {
     const message = [
       `${LINE_SEPARATOR}${this.titleTemplate('주문 메뉴')}`,

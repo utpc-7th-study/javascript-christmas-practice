@@ -13,6 +13,20 @@ class OrderList {
     );
   }
 
+  orderDetail() {
+    return this.#orders.map((order) => {
+      const { menu, quantity } = order.detail();
+      return [menu, quantity];
+    });
+  }
+
+  totalCost() {
+    return this.#orders.reduce((total, currentOrder) => {
+      const { price } = currentOrder.detail();
+      return total + price;
+    }, 0);
+  }
+
   #validate(orderInput) {
     this.#validateInputFormat(orderInput);
     this.#validateQuantity(orderInput);
@@ -43,9 +57,8 @@ class OrderList {
 
   #validateQuantity(orderInput) {
     const orders = this.#convertOrderInput(orderInput);
-
     const totalQuantity = orders.reduce((total, [_, quantity]) => total + quantity, 0);
-    console.log(totalQuantity);
+
     if (totalQuantity > MAX_QUANTITY) throw new Error(ERROR_MESSAGE.OVER_ORDER_QUANTITY);
   }
 
