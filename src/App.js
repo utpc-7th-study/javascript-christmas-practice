@@ -42,12 +42,15 @@ class App {
 
   #printRecipt() {
     const totalCost = this.#orderList.totalCost();
+    const { discountDetail, giftDetail } = this.#getBenefitDetail();
+    const discountAmount = Object.values(discountDetail).reduce((total, curr) => total + curr, 0);
     OutputView.printPreview(this.#visitDate.getDate());
     OutputView.printMenu(this.#orderList.orderDetail());
     OutputView.printTotalCost(totalCost);
-    const { discountDetail, giftDetail } = this.#getBenefitDetail();
     OutputView.printGift(giftDetail);
     OutputView.printBenefits(discountDetail, giftDetail);
+    OutputView.printTotalDiscount(discountAmount, giftDetail);
+    OutputView.printFinalCost(totalCost - discountAmount);
   }
 
   #getBenefitDetail() {

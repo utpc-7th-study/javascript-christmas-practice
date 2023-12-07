@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { EOL as LINE_SEPARATOR } from 'os';
 import KR_BENEFIT_DATA from '../src/constant/krBenefit.js';
+import addComma from '../src/utils/addComma.js';
 
 const OutputView = {
   titleTemplate(message) {
@@ -29,7 +30,7 @@ const OutputView = {
   printTotalCost(totalCost) {
     const message = [
       `${LINE_SEPARATOR}${this.titleTemplate('할인 전 총주문 금액')}`,
-      `${totalCost}원`,
+      `${addComma(totalCost)}원`,
     ];
 
     this.print(message.join(LINE_SEPARATOR));
@@ -52,32 +53,35 @@ const OutputView = {
       `${LINE_SEPARATOR}${this.titleTemplate('혜택 내역')}`,
       discountDetails.length
         ? discountDetails
-          .map(([benefit, amount]) => amount && `${KR_BENEFIT_DATA[benefit]}: -${amount}원`)
-          .filter(Boolean)
-          .join(LINE_SEPARATOR)
+            .map(([title, amount]) => amount && `${KR_BENEFIT_DATA[title]}: -${addComma(amount)}원`)
+            .filter(Boolean)
+            .join(LINE_SEPARATOR)
         : '없음',
     ];
-    if (giftDetail.price) message.push(`증정 이벤트: -${giftDetail.price}원`);
+    if (giftDetail.price) message.push(`증정 이벤트: -${addComma(giftDetail.price)}원`);
     this.print(message.join(LINE_SEPARATOR));
   },
 
-  printTotalDiscount(totalDiscountAmount, giftDetail) {
+  printTotalDiscount(discountAmount, giftDetail) {
     const message = [
       `${LINE_SEPARATOR}${this.titleTemplate('총혜택 금액')}`,
-      `-${totalDiscountAmount}원`,
+      `-${addComma((discountAmount ?? 0) + (giftDetail.price ?? 0))}원`,
     ];
 
     this.print(message.join(LINE_SEPARATOR));
   },
 
   printFinalCost(finalCost) {
-    const message = [this.titleTemplate('할인 후 예상 결제 금액'), `${finalCost}원`];
+    const message = [
+      `${LINE_SEPARATOR}${this.titleTemplate('할인 후 예상 결제 금액')}`,
+      `${addComma(finalCost)}원`,
+    ];
 
     this.print(message.join(LINE_SEPARATOR));
   },
 
   printBadge(badge) {
-    const message = [this.titleTemplate('12월 이벤트 배지'), badge];
+    const message = [`${LINE_SEPARATOR}${this.titleTemplate('12월 이벤트 배지')}`, badge];
 
     this.print(message.join(LINE_SEPARATOR));
   },
