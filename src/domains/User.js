@@ -59,6 +59,18 @@ class User {
       discount * this.menuList.countMain(this.#orderList),
     ]);
   }
+
+  calculateTotalDiscount() {
+    let totalDiscount = 0;
+    this.#benefitList.forEach((benefit) => {
+      const [_, amount] = benefit;
+      totalDiscount += amount;
+    });
+
+    if (this.#freebie !== '없음') totalDiscount += 25000;
+
+    return totalDiscount;
+  }
 }
 
 export default User;
