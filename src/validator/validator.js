@@ -34,6 +34,19 @@ const Validator = {
       throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
     }
   },
+
+  overMaxQuantity(menus) {
+    let totalQuantity = 0;
+
+    menus.forEach((menu) => {
+      const [_, quantity] = menu;
+      totalQuantity += quantity;
+    });
+
+    if (totalQuantity > 20) {
+      throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    }
+  },
 };
 
 export const validateDate = (date) => {
@@ -44,4 +57,5 @@ export const validateDate = (date) => {
 export const validateMenus = (menus) => {
   Validator.onlyBeverage(menus);
   Validator.invalidQuantity(menus);
+  Validator.overMaxQuantity(menus);
 };
