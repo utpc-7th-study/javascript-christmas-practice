@@ -16,6 +16,11 @@ class Controller {
     });
   }
 
+  showOrderList(date) {
+    OutputView.printDate(date);
+    OutputView.printMenu(this.#user);
+  }
+
   createBenefitList(date) {
     this.#user.createBenefitList(date);
   }

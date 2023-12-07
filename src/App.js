@@ -9,6 +9,8 @@ class App {
     const menuList = await InputView.readMenus();
 
     controller.order(menuList);
+    controller.showOrderList(date);
+
     controller.createBenefitList(date);
   }
 }
