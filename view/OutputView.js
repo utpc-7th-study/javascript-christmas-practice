@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { EOL as LINE_SEPARATOR } from 'os';
-import KR_BENEFIT_DATA from '../src/constant/krBenefit';
+import KR_BENEFIT_DATA from '../src/constant/krBenefit.js';
 
 const OutputView = {
   titleTemplate(message) {
@@ -82,6 +82,10 @@ const OutputView = {
     const message = [this.titleTemplate('12월 이벤트 배지'), badge];
 
     this.print(message.join(LINE_SEPARATOR));
+  },
+
+  printGreeting() {
+    this.print('안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.');
   },
 
   print(message) {
