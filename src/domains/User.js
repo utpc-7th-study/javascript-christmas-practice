@@ -92,6 +92,10 @@ class User {
     const badges = new BadgeList();
     return badges.choose(totalBenefit);
   }
+
+  getOrderList() {
+    return this.#orderList;
+  }
 }
 
 export default User;

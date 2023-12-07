@@ -18,7 +18,7 @@ class Controller {
 
   showOrderList(date) {
     OutputView.printDate(date);
-    OutputView.printMenu(this.#user);
+    OutputView.printMenu(this.#user.getOrderList());
   }
 
   createBenefitList(date) {

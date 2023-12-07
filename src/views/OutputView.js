@@ -11,11 +11,13 @@ const OutputView = {
     );
   },
 
-  printMenu() {
+  printMenu(orderList) {
     Console.print('<주문 메뉴>');
-    // ...
+    orderList.forEach((order) => {
+      const [name, quantity] = order;
+      Console.print(`${name} ${quantity}개`);
+    });
   },
-  // ...
 };
 
 export default OutputView;
