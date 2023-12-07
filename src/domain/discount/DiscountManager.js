@@ -23,6 +23,15 @@ class DiscountManager {
     };
   }
 
+  getBadge() {
+    const totalProfit = Object.values(this.recommendDiscount());
+    const totalProfitPrice = totalProfit.reduce((a, c) => a + c, 0);
+
+    if (totalProfitPrice >= 20000) return '별';
+    if (totalProfitPrice >= 10000) return '트리';
+    if (totalProfitPrice >= 5000) return '산타';
+  }
+
   #calculateChristmasDDayDiscount() {
     const result = new ChristmasDDayDiscount(this.#dateManager, this.#orderMenu).calculate();
     return result;
