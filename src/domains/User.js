@@ -1,5 +1,6 @@
 import Menu from './Menu.js';
 import EventList from './EventLIst.js';
+import BadgeList from './BadgeList.js';
 
 class User {
   #orderList;
@@ -83,6 +84,13 @@ class User {
     const totalDiscount = this.#calculateTotalDiscount();
 
     return originalPayment - totalDiscount;
+  }
+
+  createBadge() {
+    const totalBenefit = this.calculateTotalBenefit();
+
+    const badges = new BadgeList();
+    return badges.choose(totalBenefit);
   }
 }
 
