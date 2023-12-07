@@ -26,7 +26,7 @@ describe('방문 일자 테스트', () => {
     mockYear.mockImplementation(() => 2023);
 
     const mockMonth = jest.spyOn(Date.prototype, 'getMonth');
-    mockMonth.mockImplementation(() => 12);
+    mockMonth.mockImplementation(() => 11);
 
     // when
     const visitDate = new VisitDate(date);
