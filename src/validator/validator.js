@@ -10,6 +10,18 @@ const hasInvalidQuantity = (menu) => {
   return !Number.isInteger(quantity) || quantity < 1;
 };
 
+const inMenu = (menu) => {
+  let exists = false;
+  const [name, _] = menu;
+  Object.entries(MENUS).forEach(([_, menuList]) => {
+    if (menuList.some((menu) => menu.name === name)) {
+      exists = true;
+    }
+  });
+
+  return exists;
+};
+
 const Validator = {
   numberType(input) {
     if (!Number.isInteger(input)) {
@@ -47,6 +59,12 @@ const Validator = {
       throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
     }
   },
+
+  notExists(menus) {
+    if (menus.some((menu) => !inMenu(menu))) {
+      throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    }
+  },
 };
 
 export const validateDate = (date) => {
@@ -58,4 +76,5 @@ export const validateMenus = (menus) => {
   Validator.onlyBeverage(menus);
   Validator.invalidQuantity(menus);
   Validator.overMaxQuantity(menus);
+  Validator.notExists(menus);
 };
