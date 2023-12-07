@@ -24,6 +24,10 @@ class Controller {
   createBenefitList(date) {
     this.#user.createBenefitList(date);
   }
+
+  showBenefitResult() {
+    OutputView.printOriginalPayment(this.#user.calculateOriginalPayment());
+  }
 }
 
 export default Controller;

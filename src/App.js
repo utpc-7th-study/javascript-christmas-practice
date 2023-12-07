@@ -12,6 +12,7 @@ class App {
     controller.showOrderList(date);
 
     controller.createBenefitList(date);
+    controller.showBenefitResult();
   }
 }
 
