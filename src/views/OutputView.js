@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import addComma from '../utils/addComma.js';
 
 const OutputView = {
   printStartMessage() {
@@ -21,7 +22,7 @@ const OutputView = {
 
   printOriginalPayment(payment) {
     Console.print('\n<할인 전 총주문 금액>');
-    Console.print(`${payment}원`);
+    Console.print(`${addComma(payment)}원`);
   },
 };
 
