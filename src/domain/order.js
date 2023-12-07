@@ -2,26 +2,20 @@ import MENU_DATA from '../constant/menuData.js';
 import ERROR_MESSAGE from '../constant/message.js';
 
 class Order {
-  #menu;
+  #menuDetail = {};
 
-  #price;
-
-  #quantity;
+  #quantity = 0;
 
   constructor(menuName, quantity) {
     this.#validate(menuName);
     const menuData = MENU_DATA.find((data) => data.name === menuName);
-    this.#menu = menuData.name;
-    this.#price = menuData.price * quantity;
+    this.#menuDetail = menuData;
     this.#quantity = quantity;
   }
 
   detail() {
-    return {
-      menu: this.#menu,
-      price: this.#price,
-      quantity: this.#quantity,
-    };
+    const { name: menu, category, price } = this.#menuDetail;
+    return { menu, category, price, quantity: this.#quantity };
   }
 
   #validate(menuName) {
