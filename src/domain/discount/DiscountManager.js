@@ -1,6 +1,7 @@
 import ChristmasDDayDiscount from './ChristmasDDayDiscount.js';
 import WeekendDiscount from './WeekendDiscount.js';
 import WeekDayDiscount from './WeekDayDiscount.js';
+import SpecialDiscount from './SpecialDiscount.js';
 
 class DiscountManager {
   #dateManager;
@@ -16,6 +17,7 @@ class DiscountManager {
       christmasDDayDiscount: this.#calculateChristmasDDayDiscount(),
       weekDayDiscount: this.#calculateWeekDayDiscount(),
       weekendDiscount: this.#calculateWeekendDiscount(),
+      specialDiscount: this.#calculateSpecialDiscount(),
     };
   }
 
@@ -31,6 +33,11 @@ class DiscountManager {
 
   #calculateWeekendDiscount() {
     const result = new WeekendDiscount(this.#dateManager, this.#orderMenu).calculate();
+    return result;
+  }
+
+  #calculateSpecialDiscount() {
+    const result = new SpecialDiscount(this.#dateManager, this.#orderMenu).calculate();
     return result;
   }
 }
