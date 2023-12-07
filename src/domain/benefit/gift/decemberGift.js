@@ -6,7 +6,7 @@ class DecemberGift extends Gift {
     const gift = MENU_DATA.find((data) => data.name === '샴페인');
     return this.getTotalAmount() >= 120000
       ? { name: gift.name, price: gift.price, quantity: 1 }
-      : null;
+      : {};
   }
 }
 
