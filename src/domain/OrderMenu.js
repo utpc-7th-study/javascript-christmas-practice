@@ -1,3 +1,5 @@
+import dataBase from '../dataBase.js';
+
 const ERROR_MESSAGE = '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.';
 
 class OrderMenu {
@@ -30,6 +32,7 @@ class OrderMenu {
     this.#validateNumberType(menuAmounts);
     this.#validateMenuAmountRange(menuAmounts);
     this.#validateDuplicateMenuNames(menuNames);
+    this.#validateIncludeMenu(menuNames);
   }
 
   #validateNumberType(menuAmounts) {
@@ -55,6 +58,15 @@ class OrderMenu {
 
   #validateDuplicateMenuNames(menuNames) {
     if (new Set(menuNames).size !== menuNames.length) {
+      throw new Error(ERROR_MESSAGE);
+    }
+  }
+
+  #validateIncludeMenu(menuNames) {
+    const menuDataBase = Object.values(dataBase.getMenus()).map(({ menuName }) => menuName);
+    const isValid = menuNames.some((menu) => menuDataBase.includes(menu));
+
+    if (!isValid) {
       throw new Error(ERROR_MESSAGE);
     }
   }
