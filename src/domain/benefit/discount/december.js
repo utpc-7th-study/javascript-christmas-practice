@@ -7,12 +7,22 @@ class DecemberDiscount extends Discount {
 
   #D_DAY_INCREASE = 100;
 
-  applyMonthly() {
-    this.#special();
-    this.#xMasDday();
+  apply() {
+    this.#weekDiscount();
+    this.#specialDiscount();
+    this.#xMasDdayDiscount();
   }
 
-  #special() {
+  #weekDiscount(dessertCount, mainCount) {
+    const VisitDayIsWeekDay = this.weekdayData.includes(this.visitDate.getDayOfWeek());
+
+    if (VisitDayIsWeekDay) this.weekday(dessertCount);
+    if (!VisitDayIsWeekDay) this.weekend(mainCount);
+
+    this.applyMonthly();
+  }
+
+  #specialDiscount() {
     const isSpecialDate = this.visitDate.getDayOfWeek() === '일' || this.visitDate.getDate() === 25;
 
     if (isSpecialDate) {
@@ -20,7 +30,7 @@ class DecemberDiscount extends Discount {
     }
   }
 
-  #xMasDday() {
+  #xMasDdayDiscount() {
     const visitDate = this.visitDate.getDate();
     if (visitDate >= 1 && visitDate <= 25) {
       this.setDiscount('dDay', this.#D_DAY_DISCOUNT + visitDate * this.#D_DAY_INCREASE);
