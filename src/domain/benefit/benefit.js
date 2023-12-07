@@ -1,5 +1,5 @@
-import Discount from './discount/discount';
-import Gift from './gift/gift';
+import Discount from './discount/discount.js';
+import Gift from './gift/gift.js';
 
 class Benefit {
   constructor(discount, gift) {
