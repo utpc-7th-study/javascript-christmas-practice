@@ -1,5 +1,6 @@
 import EVENT_DATE from '../constant/eventDate.js';
 import ERROR_MESSAGE from '../constant/message.js';
+import dayOfWeek from '../utils/dayOfWeek.js';
 
 class VisitDate {
   #date;
@@ -9,12 +10,24 @@ class VisitDate {
     this.#date = visitDate;
   }
 
+  getDate() {
+    return this.#date;
+  }
+
+  getDayOfWeek() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    return dayOfWeek(year, month, this.#date);
+  }
+
   #validate(visitDate) {
     if (Number.isNaN(Number(visitDate))) {
       throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
     }
 
-    if (visitDate < EVENT_DATE.start || visitDate > EVENT_DATE.end) {
+    if (visitDate < EVENT_DATE.december.start || visitDate > EVENT_DATE.december.end) {
       throw new Error(ERROR_MESSAGE.INVALID_DATE);
     }
   }
