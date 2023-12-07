@@ -6,6 +6,7 @@ class App {
     const controller = new Controller();
 
     const dateMenu = await InputView.readDate();
+    const menuList = await InputView.readMenus();
   }
 }
 
