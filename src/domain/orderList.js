@@ -1,15 +1,16 @@
 import MAX_QUANTITY from '../constant/max.js';
 import MENU_DATA from '../constant/menuData.js';
 import ERROR_MESSAGE from '../constant/message.js';
-import Menu from './order.js';
+import Order from './order.js';
 
 class OrderList {
   #orders = [];
 
   constructor(orderInput) {
     this.#validate(orderInput);
+
     this.#orders = this.#convertOrderInput(orderInput).map(
-      ([menu, quantity]) => new Menu(menu, quantity),
+      ([menu, quantity]) => new Order(menu, quantity),
     );
   }
 
@@ -25,6 +26,23 @@ class OrderList {
       const { price } = currentOrder.detail();
       return total + price;
     }, 0);
+  }
+
+  mainCount() {
+    return this.#findCategoryCount('메인');
+  }
+
+  dessertCount() {
+    return this.#findCategoryCount('디저트');
+  }
+
+  #findCategoryCount(findCategory) {
+    const categoryCount = this.#orders.reduce((count, currentOrder) => {
+      const { category, quantity } = currentOrder.detail();
+      return count + (category === findCategory) * quantity;
+    }, 0);
+
+    return categoryCount;
   }
 
   #validate(orderInput) {
