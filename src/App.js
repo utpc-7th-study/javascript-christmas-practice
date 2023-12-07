@@ -12,6 +12,7 @@ class App {
   async run() {
     OutputView.printStartMessage();
     await this.#registerVisitDateProcess();
+    await this.#registerOrderMenuProcess();
   }
 
   async #registerVisitDateProcess() {
@@ -19,6 +20,18 @@ class App {
       try {
         const visitDate = await InputView.readDate();
         this.#eventPlanner.registerVisitDate(visitDate);
+        break;
+      } catch ({ message }) {
+        OutputView.print(message);
+      }
+    }
+  }
+
+  async #registerOrderMenuProcess() {
+    while (true) {
+      try {
+        const orderMenu = await InputView.readOrderMenu();
+        this.#eventPlanner.registerOrderMenu(orderMenu);
         break;
       } catch ({ message }) {
         OutputView.print(message);
