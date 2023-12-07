@@ -24,6 +24,11 @@ const OutputView = {
     Console.print('\n<할인 전 총주문 금액>');
     Console.print(`${addComma(payment)}원`);
   },
+
+  printBadge(badge) {
+    Console.print('\n<12월 이벤트 배지>');
+    Console.print(badge);
+  },
 };
 
 export default OutputView;

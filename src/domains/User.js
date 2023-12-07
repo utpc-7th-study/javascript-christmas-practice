@@ -86,7 +86,7 @@ class User {
     return originalPayment - totalDiscount;
   }
 
-  createBadge() {
+  getBadge() {
     const totalBenefit = this.calculateTotalBenefit();
 
     const badges = new BadgeList();

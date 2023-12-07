@@ -17,11 +17,13 @@ class BadgeList {
   }
 
   choose(amount) {
-    const badge = this.#badgeList.filter((badge) =>
-      badge.canReceive(amount)
-    )[0];
+    const badge = this.#badgeList.filter((badge) => badge.canReceive(amount));
 
-    return badge.getName();
+    if (badge.length === 0) {
+      return '없음';
+    }
+
+    return badge[0].getName();
   }
 }
 

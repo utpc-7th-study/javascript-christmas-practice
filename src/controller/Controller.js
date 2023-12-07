@@ -27,6 +27,7 @@ class Controller {
 
   showBenefitResult() {
     OutputView.printOriginalPayment(this.#user.calculateOriginalPayment());
+    OutputView.printBadge(this.#user.getBadge());
   }
 }
 
