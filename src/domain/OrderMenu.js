@@ -16,12 +16,12 @@ class OrderMenu {
 
   getTotalPrice() {
     const menuNames = this.#orderMenus.map(({ menuName }) => menuName);
-
+    const menuAmount = this.#orderMenus.map(({ menuAmount }) => menuAmount);
     const menuPriceList = Object.values(dataBase.getMenus())
       .filter(({ menuName }) => menuNames.includes(menuName))
       .map(({ menuAmount }) => menuAmount);
 
-    return menuPriceList.reduce((a, c) => a + c, 0);
+    return menuPriceList.reduce((a, c, i) => a + c * menuAmount[i], 0);
   }
 
   #splitOrderMenu(orderMenu) {

@@ -2,6 +2,7 @@ import ChristmasDDayDiscount from './ChristmasDDayDiscount.js';
 import WeekendDiscount from './WeekendDiscount.js';
 import WeekDayDiscount from './WeekDayDiscount.js';
 import SpecialDiscount from './SpecialDiscount.js';
+import FreeGiftDiscount from './FreeGiftDiscount.js';
 
 class DiscountManager {
   #dateManager;
@@ -18,6 +19,7 @@ class DiscountManager {
       weekDayDiscount: this.#calculateWeekDayDiscount(),
       weekendDiscount: this.#calculateWeekendDiscount(),
       specialDiscount: this.#calculateSpecialDiscount(),
+      freeGiftDiscount: this.#calculateFreeGiftDiscount(),
     };
   }
 
@@ -38,6 +40,11 @@ class DiscountManager {
 
   #calculateSpecialDiscount() {
     const result = new SpecialDiscount(this.#dateManager, this.#orderMenu).calculate();
+    return result;
+  }
+
+  #calculateFreeGiftDiscount() {
+    const result = new FreeGiftDiscount(this.#dateManager, this.#orderMenu).calculate();
     return result;
   }
 }
