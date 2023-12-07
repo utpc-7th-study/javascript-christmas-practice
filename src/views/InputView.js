@@ -29,7 +29,7 @@ const InputView = {
       return await this.readMenus();
     }
 
-    return inputs;
+    return orderList;
   },
 };
 
