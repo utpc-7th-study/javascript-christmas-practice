@@ -9,6 +9,7 @@ class User {
   constructor() {
     this.#orderList = [];
     this.#benefitList = [];
+    this.#freebie = '없음';
     this.menuList = new Menu();
   }
 
@@ -28,6 +29,8 @@ class User {
 
   createBenefitList(date) {
     const originalPayment = this.calculateOriginalPayment();
+    if (originalPayment < 10000) return;
+
     const eventList = new EventList();
     const [eventResult, freebie] = eventList.getBenefit(date, originalPayment);
     this.#freebie = freebie;
