@@ -5,10 +5,11 @@ class App {
   async run() {
     const controller = new Controller();
 
-    const dateMenu = await InputView.readDate();
+    const date = await InputView.readDate();
     const menuList = await InputView.readMenus();
 
     controller.order(menuList);
+    controller.createBenefitList(date);
   }
 }
 

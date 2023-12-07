@@ -15,6 +15,10 @@ class Controller {
       this.#user.order(name, quantity);
     });
   }
+
+  createBenefitList(date) {
+    this.#user.createBenefitList(date);
+  }
 }
 
 export default Controller;

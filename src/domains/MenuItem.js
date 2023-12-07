@@ -16,6 +16,14 @@ class MenuItem {
   getPrice() {
     return this.#price;
   }
+
+  isDessert() {
+    return this.#category === '디저트';
+  }
+
+  isMain() {
+    return this.#category === '메인';
+  }
 }
 
 export default MenuItem;
