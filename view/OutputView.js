@@ -38,7 +38,9 @@ const OutputView = {
   printGift(giftDetail) {
     const message = [
       `${LINE_SEPARATOR}${this.titleTemplate('증정 메뉴')}`,
-      giftDetail ? `${giftDetail.name} ${giftDetail.quantity}개` : '없음',
+      giftDetail.name && giftDetail.quantity
+        ? `${giftDetail.name} ${giftDetail.quantity}개`
+        : '없음',
     ];
 
     this.print(message.join(LINE_SEPARATOR));
@@ -50,19 +52,18 @@ const OutputView = {
       `${LINE_SEPARATOR}${this.titleTemplate('혜택 내역')}`,
       discountDetails.length
         ? discountDetails
-            .map(([benefit, discountAmount]) => `${KR_BENEFIT_DATA[benefit]}: -${discountAmount}원`)
-            .join(LINE_SEPARATOR)
+          .map(([benefit, amount]) => amount && `${KR_BENEFIT_DATA[benefit]}: -${amount}원`)
+          .filter(Boolean)
+          .join(LINE_SEPARATOR)
         : '없음',
     ];
-
-    if (giftDetail) message.push(`증정 이벤트: -${giftDetail.price}원`);
-
+    if (giftDetail.price) message.push(`증정 이벤트: -${giftDetail.price}원`);
     this.print(message.join(LINE_SEPARATOR));
   },
 
-  printTotalDiscount(totalDiscountAmount) {
+  printTotalDiscount(totalDiscountAmount, giftDetail) {
     const message = [
-      `LINE_SEPARATOR${this.titleTemplate('총혜택 금액')}`,
+      `${LINE_SEPARATOR}${this.titleTemplate('총혜택 금액')}`,
       `-${totalDiscountAmount}원`,
     ];
 
