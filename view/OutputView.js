@@ -35,23 +35,24 @@ const OutputView = {
     this.print(message.join(LINE_SEPARATOR));
   },
 
-  printGift(gift) {
-    const giftArray = Object.entries(gift);
+  printGift(giftDetail) {
     const message = [
       `${LINE_SEPARATOR}${this.titleTemplate('증정 메뉴')}`,
-      giftArray.length ? gift.map(([menu, quantity]) => this.menuTemplate(menu, quantity)) : '없음',
+      giftDetail ? `${giftDetail.name} ${giftDetail.quantity}개` : '없음',
     ];
 
     this.print(message.join(LINE_SEPARATOR));
   },
 
-  printBenefits(benefits) {
-    const benefitsArray = Object.entries(benefits);
+  printBenefits(discountDetail, giftDetail) {
+    const discountDetails = Object.entries(discountDetail);
+
     const message = [
-      `LINE_SEPARATOR${this.titleTemplate('혜택 내역')}`,
-      benefitsArray.length
-        ? benefitsArray.map(
-            ([benefit, discountAmount]) => `${KR_BENEFIT_DATA[benefit]}: -${discountAmount}`,
+      `${LINE_SEPARATOR}${this.titleTemplate('혜택 내역')}`,
+      discountDetails.length
+        ? discountDetails.map(
+            ([benefit, discountAmount]) =>
+              `${KR_BENEFIT_DATA[benefit]}: -${discountAmount}${LINE_SEPARATOR}`,
           )
         : '없음',
     ];
