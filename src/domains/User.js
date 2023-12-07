@@ -60,16 +60,29 @@ class User {
     ]);
   }
 
-  calculateTotalDiscount() {
+  #calculateTotalDiscount() {
     let totalDiscount = 0;
     this.#benefitList.forEach((benefit) => {
       const [_, amount] = benefit;
       totalDiscount += amount;
     });
 
-    if (this.#freebie !== '없음') totalDiscount += 25000;
-
     return totalDiscount;
+  }
+
+  calculateTotalBenefit() {
+    let totalBenefit = this.#calculateTotalDiscount();
+
+    if (this.#freebie !== '없음') totalBenefit += 25000;
+
+    return totalBenefit;
+  }
+
+  calculateTotalPayment() {
+    const originalPayment = this.calculateOriginalPayment();
+    const totalDiscount = this.#calculateTotalDiscount();
+
+    return originalPayment - totalDiscount;
   }
 }
 
