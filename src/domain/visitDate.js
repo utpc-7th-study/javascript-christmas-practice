@@ -24,7 +24,7 @@ class VisitDate {
 
   #validate(visitDate) {
     if (Number.isNaN(Number(visitDate))) {
-      throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
+      throw new Error(ERROR_MESSAGE.INVALID_DATE);
     }
 
     if (visitDate < EVENT_DATE.december.start || visitDate > EVENT_DATE.december.end) {
