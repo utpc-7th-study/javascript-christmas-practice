@@ -11,8 +11,7 @@ class FreeGiftDiscount extends Discount {
   abstractCalculateDiscount() {
     const totalPrice = this.#orderMenu.getTotalPrice();
 
-    if (totalPrice >= 120000) return 25000;
-    return 0;
+    return totalPrice >= 120000 ? 25000 : 0;
   }
 }
 

@@ -15,17 +15,22 @@ class WeekendDiscount extends Discount {
     const isWeekend = this.#dateManager.isWeekend();
     if (!isWeekend) return 0;
 
-    const WeekendDiscountMenuDataBase = Object.values(dataBase.getMenus())
-      .filter(({ category }) => category === 'mainDish')
-      .map(({ menuName }) => menuName);
+    const discountMenus = this.#getWeekendDiscountMenu();
 
-    return this.#calculateWeekdDiscount(WeekendDiscountMenuDataBase);
+    return this.#totalDiscountPrice(discountMenus);
   }
 
-  #calculateWeekdDiscount(WeekendDiscountMenuDataBase) {
-    return this.#orderMenu
-      .getMenus()
-      .filter(({ menuName }) => WeekendDiscountMenuDataBase.includes(menuName))
+  #getWeekendDiscountMenu() {
+    return Object.values(dataBase.getMenus())
+      .filter(({ category }) => category === 'mainDish')
+      .map(({ menuName }) => menuName);
+  }
+
+  #totalDiscountPrice(discountMenus) {
+    const userMenu = this.#orderMenu.getMenus();
+
+    return userMenu
+      .filter(({ menuName }) => discountMenus.includes(menuName))
       .reduce((acc, { menuAmount }) => acc + menuAmount * 2023, 0);
   }
 }

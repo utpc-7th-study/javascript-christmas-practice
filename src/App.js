@@ -11,10 +11,12 @@ class App {
 
   async run() {
     OutputView.printStartMessage();
+
     await this.#registerVisitDateProcess();
     await this.#registerOrderMenuProcess();
 
-    this.#recommendMenuProcess();
+    this.#orderResult();
+    this.#profitResult();
   }
 
   async #registerVisitDateProcess() {
@@ -41,8 +43,23 @@ class App {
     }
   }
 
-  #recommendMenuProcess() {
-    this.#eventPlanner.recommend();
+  #orderResult() {
+    const { visitDate, menus, totalPrice } = this.#eventPlanner.orderResult();
+
+    OutputView.printPreview(visitDate);
+    OutputView.printMenu(menus);
+    OutputView.printTotalPrice(totalPrice);
+  }
+
+  #profitResult() {
+    const { profitHistory, totalProfit, expectPrice, badgeBenefit } =
+      this.#eventPlanner.recommend();
+
+    OutputView.printFreeGift(profitHistory.freeGiftDiscount);
+    OutputView.printProfitHistory(profitHistory);
+    OutputView.printTotalProfit(totalProfit);
+    OutputView.printExpectPrice(expectPrice);
+    OutputView.printBadgeBenefit(badgeBenefit);
   }
 }
 

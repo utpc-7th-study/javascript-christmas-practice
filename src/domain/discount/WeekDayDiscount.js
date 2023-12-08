@@ -12,20 +12,23 @@ class WeekDayDiscount extends Discount {
   }
 
   abstractCalculateDiscount() {
-    const isWeekDay = this.#dateManager.isWeekDay();
-    if (!isWeekDay) return 0;
+    if (!this.#dateManager.isWeekDay()) return 0;
+    const discountMenus = this.#getWeekDayDiscountMenu();
 
-    const weekDayDiscountMenuDataBase = Object.values(dataBase.getMenus())
-      .filter(({ category }) => category === 'dessert')
-      .map(({ menuName }) => menuName);
-
-    return this.#calculateWeekdDiscount(weekDayDiscountMenuDataBase);
+    return this.#totalDiscountPrice(discountMenus);
   }
 
-  #calculateWeekdDiscount(weekDayDiscountMenuDataBase) {
-    return this.#orderMenu
-      .getMenus()
-      .filter(({ menuName }) => weekDayDiscountMenuDataBase.includes(menuName))
+  #getWeekDayDiscountMenu() {
+    return Object.values(dataBase.getMenus())
+      .filter(({ category }) => category === 'dessert')
+      .map(({ menuName }) => menuName);
+  }
+
+  #totalDiscountPrice(discountMenus) {
+    const userMenu = this.#orderMenu.getMenus();
+
+    return userMenu
+      .filter(({ menuName }) => discountMenus.includes(menuName))
       .reduce((acc, { menuAmount }) => acc + menuAmount * 2023, 0);
   }
 }

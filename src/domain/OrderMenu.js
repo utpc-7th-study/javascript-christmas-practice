@@ -1,22 +1,29 @@
 import dataBase from '../dataBase.js';
+import MenuOrderItem from './MenuOrderItem.js';
 
 const ERROR_MESSAGE = '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.';
 
+// OrderMenuManager
 class OrderMenu {
-  #orderMenus;
+  #orderMenus = [];
 
   constructor(orderMenu) {
     this.#validate(orderMenu);
-    this.#orderMenus = this.#splitOrderMenu(orderMenu);
+    this.#orderMenus = this.#generateOrderMenuItems(orderMenu);
   }
 
   getMenus() {
-    return this.#orderMenus;
+    const result = this.#orderMenus.map((menuItem) => {
+      return { menuName: menuItem.getMenuName(), menuAmount: menuItem.getMenuAmount() };
+    });
+
+    return result;
   }
 
   getTotalPrice() {
-    const menuNames = this.#orderMenus.map(({ menuName }) => menuName);
-    const menuAmount = this.#orderMenus.map(({ menuAmount }) => menuAmount);
+    const menuNames = this.#orderMenus.map((order) => order.getMenuName());
+    const menuAmount = this.#orderMenus.map((order) => order.getMenuAmount());
+
     const menuPriceList = Object.values(dataBase.getMenus())
       .filter(({ menuName }) => menuNames.includes(menuName))
       .map(({ menuAmount }) => menuAmount);
@@ -24,37 +31,36 @@ class OrderMenu {
     return menuPriceList.reduce((a, c, i) => a + c * menuAmount[i], 0);
   }
 
-  #splitOrderMenu(orderMenu) {
-    const splitOrderMenuWithComma = orderMenu.split(',');
-
-    return this.#formattedOrderMenus(splitOrderMenuWithComma);
-  }
-
-  #formattedOrderMenus(splitOrderMenuWithComma) {
-    return splitOrderMenuWithComma.map((menu) => {
+  #generateOrderMenuItems(orderMenu) {
+    const result = orderMenu.split(',').map((menu) => {
       const [menuName, menuAmount] = menu.split('-');
-
-      return { menuName, menuAmount: Number(menuAmount) };
+      return new MenuOrderItem(menuName, menuAmount);
     });
+
+    return result;
   }
 
   #validate(orderMenu) {
-    const splitOrderMenu = this.#splitOrderMenu(orderMenu);
-    const menuAmounts = splitOrderMenu.map(({ menuAmount }) => menuAmount);
-    const menuNames = splitOrderMenu.map(({ menuName }) => menuName);
+    const splitOrderMenu = orderMenu.split(',').map((item) => item.split('-'));
+    const menuNames = splitOrderMenu.map(([menuName]) => menuName);
+    const menuAmounts = splitOrderMenu.map(([_, menuAmounts]) => Number(menuAmounts));
 
-    this.#validateNumberType(menuAmounts);
-    this.#validateMenuAmountRange(menuAmounts);
     this.#validateDuplicateMenuNames(menuNames);
-    this.#validateIncludeMenu(menuNames);
-    this.#validateOnlyBeverage(menuNames);
     this.#validateMenuOderFormat(menuNames);
+    this.#validateMenuAmountRange(menuAmounts);
+    this.#validateOnlyBeverage(menuNames);
   }
 
-  #validateNumberType(menuAmounts) {
-    const isNotValid = menuAmounts.some((number) => !/^[0-9]+$/.test(number));
+  #validateDuplicateMenuNames(menuNames) {
+    if (new Set(menuNames).size !== menuNames.length) {
+      throw new Error(ERROR_MESSAGE);
+    }
+  }
 
-    if (isNotValid) {
+  #validateMenuOderFormat(menuNames) {
+    const isValid = menuNames.every(([menuName]) => menuName.trim('') === menuName);
+
+    if (!isValid) {
       throw new Error(ERROR_MESSAGE);
     }
   }
@@ -72,37 +78,12 @@ class OrderMenu {
     }
   }
 
-  #validateDuplicateMenuNames(menuNames) {
-    if (new Set(menuNames).size !== menuNames.length) {
-      throw new Error(ERROR_MESSAGE);
-    }
-  }
-
-  #validateIncludeMenu(menuNames) {
-    const menuDataBase = Object.values(dataBase.getMenus()).map(({ menuName }) => menuName);
-    const isValid = menuNames.every((menu) => menuDataBase.includes(menu));
-
-    if (!isValid) {
-      throw new Error(ERROR_MESSAGE);
-    }
-  }
-
   #validateOnlyBeverage(menuNames) {
     const beverageDataBase = Object.values(dataBase.getMenus())
       .filter(({ category }) => category === 'beverage')
       .map(({ menuName }) => menuName);
 
-    const isOnlyBeverage = menuNames.every((menu) => beverageDataBase.includes(menu));
-
-    if (isOnlyBeverage) {
-      throw new Error(ERROR_MESSAGE);
-    }
-  }
-
-  #validateMenuOderFormat(menuNames) {
-    const isValid = menuNames.every((menuName) => menuName.trim('') === menuName);
-
-    if (!isValid) {
+    if (beverageDataBase.includes(menuNames)) {
       throw new Error(ERROR_MESSAGE);
     }
   }

@@ -14,12 +14,24 @@ class EventPlanner {
     this.#orderMenu = new OrderMenu(orderMenu);
   }
 
+  orderResult() {
+    const visitDate = this.#dateManager.getVisitDate();
+    const menus = this.#orderMenu.getMenus();
+    const totalPrice = this.#orderMenu.getTotalPrice();
+
+    return { visitDate, totalPrice, menus };
+  }
+
   recommend() {
     const info = { dateManager: this.#dateManager, orderMenu: this.#orderMenu };
     const discountManager = new DiscountManager(info);
 
-    const result = discountManager.recommendDiscount();
-    // console.log(result);
+    const profitHistory = discountManager.getProfitHisotry();
+    const totalProfit = discountManager.getTotalProfit();
+    const expectPrice = discountManager.getExpectPrice();
+    const badgeBenefit = discountManager.getBadge();
+
+    return { profitHistory, totalProfit, expectPrice, badgeBenefit };
   }
 }
 

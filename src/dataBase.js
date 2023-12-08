@@ -12,8 +12,8 @@ const dataBase = {
 
       { id: 7, menuName: '초코케이크', menuAmount: 15000, category: 'dessert' },
       { id: 8, menuName: '아이스크림', menuAmount: 5000, category: 'dessert' },
-      { id: 9, menuName: '제로콜라', menuAmount: 3000, category: 'dessert' },
 
+      { id: 9, menuName: '제로콜라', menuAmount: 3000, category: 'beverage' },
       { id: 10, menuName: '레드와인', menuAmount: 60000, category: 'beverage' },
       { id: 11, menuName: '샴페인', menuAmount: 25000, category: 'beverage' },
     ];

@@ -13,7 +13,7 @@ class DiscountManager {
     this.#orderMenu = orderMenu;
   }
 
-  recommendDiscount() {
+  getProfitHisotry() {
     return {
       christmasDDayDiscount: this.#calculateChristmasDDayDiscount(),
       weekDayDiscount: this.#calculateWeekDayDiscount(),
@@ -23,13 +23,21 @@ class DiscountManager {
     };
   }
 
-  getBadge() {
-    const totalProfit = Object.values(this.recommendDiscount());
-    const totalProfitPrice = totalProfit.reduce((a, c) => a + c, 0);
+  getExpectPrice() {
+    return (
+      this.#orderMenu.getTotalPrice() - (this.getTotalProfit() - this.#calculateFreeGiftDiscount())
+    );
+  }
 
-    if (totalProfitPrice >= 20000) return '별';
-    if (totalProfitPrice >= 10000) return '트리';
-    if (totalProfitPrice >= 5000) return '산타';
+  getTotalProfit() {
+    return Object.values(this.getProfitHisotry()).reduce((a, c) => a + c, 0);
+  }
+
+  getBadge() {
+    if (this.getTotalProfit() >= 20000) return '산타';
+    if (this.getTotalProfit() >= 10000) return '트리';
+    if (this.getTotalProfit() >= 5000) return '별';
+    return '없음';
   }
 
   #calculateChristmasDDayDiscount() {
