@@ -17,6 +17,3 @@ class ChristmasDdayEvent {
     return discount;
   }
 }
-
-const aa = new ChristmasDdayEvent(26);
-console.log(aa.calculateDiscount());
