@@ -1,5 +1,5 @@
 import { parseData } from '../utils/ParseData.js';
-import { calculateWeekDiscount } from '../utils/calculateDiscount.js';
+import { calculateWeekDiscount } from '../utils/calculate.js';
 
 class WeekDiscountEvent {
   #date;
@@ -13,19 +13,22 @@ class WeekDiscountEvent {
     const date = this.#date % 7;
     if (date !== 1 && date % 7 !== 2) {
       if (date === 3 || this.#date === 25) {
-        return 'specialWeekDay';
+        return 'specialweekday';
       }
-      return 'weekDay';
+      return 'weekday';
     }
     return 'weekend';
   }
 
-  whichDate() {
+  getWeekDiscount() {
     const date = this.#validateDate();
-    if (date === 'weekDay') return this.#weekDayDiscount();
-    if (date === 'weekend') return this.#weekendDsicount();
-    if (date === 'specialWeekDay')
-      return this.#weekDayDiscount() + this.#specialDayDiscount();
+    if (date === 'weekday') return ['weekday', this.#weekDayDiscount()];
+    if (date === 'weekend') return ['weekend', this.#weekendDsicount()];
+    if (date === 'specialweekday')
+      return [
+        'specialweekday',
+        this.#weekDayDiscount() + this.#specialDayDiscount(),
+      ];
   }
 
   #weekDayDiscount() {
@@ -60,5 +63,4 @@ class WeekDiscountEvent {
     return discount;
   }
 }
-
 export default WeekDiscountEvent;

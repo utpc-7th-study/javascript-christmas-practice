@@ -1,27 +1,26 @@
 import { parseData } from '../utils/ParseData.js';
 import { menuTemplate } from '../constants/event.js';
+import { calculateMenuAmount } from '../utils/calculate.js';
 
 class CalculateTotalAmount {
   #menus;
-  #discount;
 
-  constructor(menus, discount) {
+  constructor(menus) {
     this.#menus = menus;
-    this.#discount = discount;
   }
 
   calculateTotalPurchase() {
     const parsedMenus = parseData(this.#menus);
-    const totalPurchase = parsedMenus.reduce((acc, menu) => {
-      return acc + menuTemplate.get(menu[0]) * menu[1];
-    }, 0);
+    const totalPurchase = calculateMenuAmount(parsedMenus, menuTemplate);
 
     return totalPurchase;
   }
 
-  calculateAfterBenefits() {
-    const totalAfterBenefits = this.calculateTotalPurchase() - this.#discount;
+  calculateAfterBenefits(totalDiscount) {
+    const totalAfterBenefits = this.calculateTotalPurchase() - totalDiscount;
 
     return totalAfterBenefits;
   }
 }
+
+export default CalculateTotalAmount;

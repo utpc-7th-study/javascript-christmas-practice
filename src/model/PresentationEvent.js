@@ -1,10 +1,8 @@
 class PresentationEvent {
   #totalPurchaseCost;
-  #totalBenefitCost;
 
-  constructor(totalPurchaseCost, totalBenefitCost) {
+  constructor(totalPurchaseCost) {
     this.#totalPurchaseCost = totalPurchaseCost;
-    this.#totalBenefitCost = totalBenefitCost;
   }
 
   giveChampagne() {
@@ -16,10 +14,10 @@ class PresentationEvent {
     return discount;
   }
 
-  giveBadge() {
-    if (this.#totalBenefitCost >= 20000) return 'santa';
-    if (this.#totalBenefitCost >= 10000) return 'tree';
-    if (this.#totalBenefitCost >= 5000) return 'star';
+  giveBadge(totalBenefitCost) {
+    if (totalBenefitCost >= 20000) return 'santa';
+    if (totalBenefitCost >= 10000) return 'tree';
+    if (totalBenefitCost >= 5000) return 'star';
   }
 }
 
