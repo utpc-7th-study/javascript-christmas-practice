@@ -1,4 +1,4 @@
-import { InputView } from '../view/InputView.js';
+import { InputView } from '../view/index.js';
 
 export const splitString = (string) => {
   const splittedArr = string.split(',');

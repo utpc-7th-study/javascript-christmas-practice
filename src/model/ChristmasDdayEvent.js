@@ -3,17 +3,19 @@ class ChristmasDdayEvent {
   #discount;
 
   constructor(date) {
-    this.#validate(date);
     this.#date = date;
     this.#discount = 1000;
   }
-  #validate(date) {
-    if (date > 25) console.log('[ERROR]');
+  #validateDate() {
+    return this.#date > 25;
   }
-  calculateDiscount() {
+  calculateDdayDiscount() {
+    if (this.#validateDate(this.#date)) return 0;
     const additionalDiscount = this.#date * 100;
     const discount = this.#discount + additionalDiscount - 100;
 
     return discount;
   }
 }
+
+export default ChristmasDdayEvent;

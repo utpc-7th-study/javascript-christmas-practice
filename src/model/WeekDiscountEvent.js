@@ -1,7 +1,7 @@
 import { parseData } from '../utils/ParseData.js';
 import { calculateWeekDiscount } from '../utils/calculateDiscount.js';
 
-class WeekDiscount {
+class WeekDiscountEvent {
   #date;
   #menus;
   constructor(date, menus) {
@@ -61,6 +61,4 @@ class WeekDiscount {
   }
 }
 
-const aa = new WeekDiscount(23, '티본스테이크-2,바비큐립-1');
-
-console.log(aa.whichDate());
+export default WeekDiscountEvent;

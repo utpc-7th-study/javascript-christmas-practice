@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-export default OutputView = {
+export const OutputView = {
   printMenu() {
     Console.print('<주문 메뉴>');
     // ...

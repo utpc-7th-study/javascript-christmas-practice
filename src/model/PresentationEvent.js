@@ -23,6 +23,4 @@ class PresentationEvent {
   }
 }
 
-const aa = new PresentationEvent(11000, 20000);
-
-console.log(aa.giveChampagne());
+export default PresentationEvent;
